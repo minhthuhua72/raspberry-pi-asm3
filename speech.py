@@ -13,11 +13,13 @@ GPIO.setwarnings(False)
 # Type of PIN - ouput
 GPIO.setup(relay_pin, GPIO.OUT)
 
-# Set USB microphone as default input
+# Creating a recognition object instance
 r = sr.Recognizer()
+
+# Initialize the microphone and set it as default input
 mic = sr.Microphone(sample_rate = 48000, device_index = 2, chunk_size = 1024)
 
-# List of commands that the user can say to turn on or off the light
+# List of commands that the user can say to turn on or off the light or set up timer
 onCommand = ["turn on", "on", "turn on the light", "turn on the lights", "on the light", "turn on light", "hello"]
 offCommand = ["turn off", "off", "turn off the light", "turn off the lights", "off the light", "turn off light", "bye"]
 defCommand = ["yes", "no"]
@@ -39,7 +41,7 @@ def listen(r, mic):
 
                     # Check if the user would like to turn on the light
                     if (response in onCommand):
-                        GPIO.output(relay_pin, GPIO.LOW)
+                        GPIO.output(relay_pin, GPIO.HIGH)
                         print("Pi: The light is on")
                         print("Pi: Would you like to set timer for the light?")
 
@@ -51,7 +53,7 @@ def listen(r, mic):
 
                     # Check if the user would like to turn off the light
                     if (response in offCommand):
-                        GPIO.output(relay_pin, GPIO.HIGH)
+                        GPIO.output(relay_pin, GPIO.LOW)
                         print("Pi: The light is off")
                     
                     # Check if the user says wrong commands
