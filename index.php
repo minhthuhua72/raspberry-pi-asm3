@@ -11,15 +11,16 @@
         </form>
     <?php
         shell_exec("gpio -g mode 23 out");
+        # Check which button is press and then turn on/off the light bulb accordingly
         if(isset($_GET['off']))
             {
                             echo "LED is off";
-                            shell_exec("gpio -g write 23 1");
+                            shell_exec("gpio -g write 23 0");
             }
                 else if(isset($_GET['on']))
                 {
                             echo "LED is on";
-                            shell_exec("gpio -g write 23 0");
+                            shell_exec("gpio -g write 23 1");
                 }
     ?>
    </body>
