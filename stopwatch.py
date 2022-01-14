@@ -16,7 +16,6 @@ GPIO.setwarnings(False)
 
 def stop():
     global second
-    global minute
     while True:
         print('\t\t\t\t %d : %d '%(minute,second))
         time.sleep(1)
